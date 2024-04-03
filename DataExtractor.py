@@ -33,12 +33,13 @@ async def on_message(message):
             # Extract game data
             map_size, map_type, tribes_involved, winning_player, winning_tribe, winning_elo = extract_info(message.content)
 
-            # Validate extracted data (optional)
-            # Implement logic to check if data is in expected format
-
-            # Store data in CSV file
-            store_data(map_size, map_type, tribes_involved, winning_player, winning_tribe, winning_elo)
-            logging.info("Successfully processed game data and stored in CSV.")
+            # Validate if only two tribes are involved (1v1)
+            if len(tribes_involved.split(',')) == 2:
+                # Store data in CSV file
+                store_data(map_size, map_type, tribes_involved, winning_player, winning_tribe, winning_elo)
+                logging.info("Successfully processed 1v1 game data and stored in CSV.")
+            else:
+                logging.info("Skipping message - Not a 1v1 game (more than 2 tribes involved).")
         except Exception as e:
             logging.error(f"Error processing message: {e}")
 
