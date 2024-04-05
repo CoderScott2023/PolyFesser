@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Polytopia Win Rate Calculator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Polytopia Win Rate Calculator</h1>
+  <form id="win-rate-form">
+    <div class="filter-group">
+      <label for="tribe1">Tribe 1:</label>
+      <select id="tribe1" name="tribe1">
+        <option value="">Select Tribe</option>
+        <option value="Tribe1">Tribe 1</option>
+        <option value="Tribe2">Tribe 2</option>
+        <option value="Tribe3">Tribe 3</option>
+        </select>
+    </div>
+    <div class="filter-group">
+      <label for="tribe2">Tribe 2:</label>
+      <select id="tribe2" name="tribe2">
+        <option value="">Select Tribe</option>
+        <option value="Tribe1">Tribe 1</option>
+        <option value="Tribe2">Tribe 2</option>
+        <option value="Tribe3">Tribe 3</option>
+        </select>
+    </div>
+    <div class="filter-group">
+      <label for="map-size">Map Size:</label>
+      <select id="map-size" name="map-size">
+        <option value="">Select Map Size</option>
+        <option value="Tiny">Tiny</option>
+        <option value="Standard">Standard</option>
+        <option value="Huge">Huge</option>
+        </select>
+    </div>
+    <div class="filter-group">
+      <label for="map-type">Map Type:</label>
+      <select id="map-type" name="map-type">
+        <option value="">Select Map Type</option>
+        <option value="Lakes">Lakes</option>
+        <option value="Archipelago">Archipelago</option>
+        <option value="Continents">Continents</option>
+        </select>
+    </div>
+    <div class="filter-group">
+      <label for="min-elo">Minimum Elo:</label>
+      <input type="number" id="min-elo" name="min-elo" min="0" placeholder="Enter minimum Elo">
+    </div>
+    <div class="filter-group">
+      <label for="max-elo">Maximum Elo:</label>
+      <input type="number" id="max-elo" name="max-elo" min="0" placeholder="Enter maximum Elo">
+    </div>
+    <button type="submit">Calculate Win Rate</button>
+  </form>
+  <div id="result"></div>
+  <script src="script.js"></script>
+</body>
+</html>
