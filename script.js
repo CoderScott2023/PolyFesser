@@ -29,11 +29,6 @@ function loadGameData(fileName) {
     .catch(error => console.error('Error loading game data:', error));
 }
 
-// Example usage
-const tribe1 = "";
-const tribe2 = "";
-const filters = {};
-
 function onclick()
 {
   loadGameData('polyelo_data.json') // Replace with your actual file path
@@ -41,6 +36,7 @@ function onclick()
       // Game data loaded successfully
       var tribe1 = document.getElementById("tribe1").value;
       var tribe2 = document.getElementById("tribe2").value;
+      var filters = {};
       const winRate = calculateWinRate(data, tribe1, tribe2, filters);
       document.write(`Win rate for ${tribe1} vs ${tribe2} with filters: ${winRate}%`);
     })
