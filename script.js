@@ -34,11 +34,16 @@ const tribe1 = "";
 const tribe2 = "";
 const filters = {};
 
-loadGameData('polyelo_data.json') // Replace with your actual file path
-  .then(data => {
-    // Game data loaded successfully
-    const winRate = calculateWinRate(data, tribe1, tribe2, filters);
-    console.log(`Win rate for ${tribe1} vs ${tribe2} with filters: ${winRate}%`);
-  })
-  .catch(error => console.error('Error fetching game data:', error));
+function onclick()
+{
+  //filters.push({document.getElementById().});
+  
+  loadGameData('polyelo_data.json') // Replace with your actual file path
+    .then(data => {
+      // Game data loaded successfully
+      const winRate = calculateWinRate(data, tribe1, tribe2, filters);
+      console.log(`Win rate for ${tribe1} vs ${tribe2} with filters: ${winRate}%`);
+    })
+    .catch(error => console.error('Error fetching game data:', error));
+}
 
