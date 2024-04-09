@@ -29,7 +29,7 @@ function loadGameData(fileName) {
     .catch(error => console.error('Error loading game data:', error));
 }
 
-function onclick()
+function onClick()
 {
   loadGameData('polyelo_data.json') // Replace with your actual file path
     .then(data => {
