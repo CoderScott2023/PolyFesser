@@ -5,12 +5,15 @@ function calculateWinRate(data, tribe1, tribe2, filters) {
                       (entry.winning_tribe === tribe2 && entry.opponent_tribe === tribe1);
 
     // Filter based on user-defined criteria (replace with your data structure)
-    if(filters != {})
+    if(Object.keys(filters).length !== 0)
     {
       const filterMatch = Object.entries(filters).every(([key, value]) => entry[key] === value);
+      return isMatchup && filterMatch;
     }
-
-    return isMatchup && filterMatch;
+    else
+    {
+      return isMatchup;
+    }
   });
 
   // Count wins and losses for tribe1
