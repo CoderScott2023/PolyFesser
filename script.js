@@ -39,8 +39,8 @@ function onclick()
   loadGameData('polyelo_data.json') // Replace with your actual file path
     .then(data => {
       // Game data loaded successfully
-      tribe1 = document.getElementById("tribe1").value;
-      tribe2 = document.getElementById("tribe2").value;
+      var tribe1 = document.getElementById("tribe1").value;
+      var tribe2 = document.getElementById("tribe2").value;
       const winRate = calculateWinRate(data, tribe1, tribe2, filters);
       document.write(`Win rate for ${tribe1} vs ${tribe2} with filters: ${winRate}%`);
     })
