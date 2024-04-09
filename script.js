@@ -36,7 +36,7 @@ const filters = {};
 
 function onclick()
 {
-  //filters.push({document.getElementById().});
+  filters.push({document.getElementById("").});
   
   loadGameData('polyelo_data.json') // Replace with your actual file path
     .then(data => {
