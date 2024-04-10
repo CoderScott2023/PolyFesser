@@ -59,7 +59,7 @@
       <label for="max-elo">Maximum Elo:</label>
       <input type="number" id="max-elo" name="max-elo" min="0" placeholder="Enter maximum Elo">
     </div>
-    <button type="submit", id="clickButton", onclick="onClick()">Calculate Win Rate</button>
+    <button id="clickButton", onclick="onClick()">Calculate Win Rate</button>
   </form>
   <div id="result"></div>
 </body>
@@ -116,7 +116,7 @@ select, input[type="number"] {
 }
 
 /* Button styles */
-button[type="submit"] {
+button{
   padding: 15px 30px;
   border: none;
   border-radius: 20px;
@@ -128,7 +128,7 @@ button[type="submit"] {
   text-shadow: 2px 2px 0px black;
 }
 
-button[type="submit"]:hover {
+button:hover {
   background-image: linear-gradient(to right, yellow, pink);
 }
 
