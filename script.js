@@ -30,7 +30,7 @@ function loadGameData(fileName) {
     .then(data => {
       return data;
     })
-    .catch(error => console.error('Error loading game data: Problem with loadGameData function: ', error));
+    .catch(error => document.write('Error loading game data: Problem with loadGameData function: ', error));
 }
 
 function onClick() {
@@ -43,5 +43,5 @@ function onClick() {
       const winRate = calculateWinRate(data, tribe1, tribe2, filters);
       document.write(`Win rate for ${tribe1} vs ${tribe2} with filters: ${winRate}%`);
     })
-    .catch(error => console.error('Error fetching game data: Problem with calculateWinRate function', error));
+    .catch(error => document.write('Error fetching game data: Problem with calculateWinRate function', error));
 }
