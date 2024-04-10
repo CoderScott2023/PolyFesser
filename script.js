@@ -27,7 +27,7 @@ function calculateWinRate(data, tribe1, tribe2, filters) {
 
 // Function to load game data from a JSON file
 function loadGameData(fileName) {
-  return fetch("https://cors-anywhere.herokuapp.com/https:https://raw.githubusercontent.com/CoderScott2023/PolyFesser/main/polyelo_data.json")
+  return fetch("https://cors-anywhere.herokuapp.com/https:https://raw.githubusercontent.com/CoderScott2023/PolyFesser/gh-pages/polyelo_data.json")
     .then(response => response.json())
     .then(data => {
       return data;
