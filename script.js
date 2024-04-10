@@ -40,6 +40,7 @@ function onClick()
   loadGameData('polyelo_data.json') // Replace with your actual file path
     .then(data => {
       // Game data loaded successfully
+      .then(data => console.log(data))
       var tribe1 = document.getElementById("tribe1").value;
       var tribe2 = document.getElementById("tribe2").value;
       var filters = {};
