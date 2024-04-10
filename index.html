@@ -8,7 +8,7 @@
 </head>
 <body>
   <h1>PolyFesser</h1>
-  <form id="win-rate-form">
+  <div id="win-rate-form" class="buttons">
     <div class="filter-group">
       <label for="tribe1">Tribe 1:</label>
       <select id="tribe1" name="tribe1">
@@ -59,8 +59,8 @@
       <label for="max-elo">Maximum Elo:</label>
       <input type="number" id="max-elo" name="max-elo" min="0" placeholder="Enter maximum Elo">
     </div>
-    <button id="clickButton", onclick="onClick()">Calculate Win Rate</button>
-  </form>
+    <button type="button" id="clickButton", onclick="onClick()">Calculate Win Rate</button>
+  </div>
   <div id="result"></div>
 </body>
 <script src="script.js"></script>
@@ -90,7 +90,7 @@ h1 span { /* Style for "Poly" part of the title */
 }
 
 /* Form styles */
-form {
+.buttons {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
