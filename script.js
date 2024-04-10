@@ -27,7 +27,7 @@ function calculateWinRate(data, tribe1, tribe2, filters) {
 
 // Function to load game data from a JSON file
 function loadGameData(fileName) {
-  return fetch("./polyelo_data.json")
+  return fetch("https://raw.githubusercontent.com/CoderScott2023/PolyFesser/main/polyelo_data.json")
     .then(response => response.json())
     .then(data => {
       return data;
