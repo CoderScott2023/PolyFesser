@@ -47,6 +47,6 @@ function onClick()
       const winRate = calculateWinRate(data, tribe1, tribe2, filters);
       console.log(`Win rate for ${tribe1} vs ${tribe2} with filters: ${winRate}%`);
     })
-    .catch(error => console.log('Error fetching game data: Problem with calculateWinRate function', error));
+    .catch(error => document.write('Error fetching game data: Problem with calculateWinRate function', error));
 }
 
