@@ -37,7 +37,7 @@ function loadGameData(fileName) {
 
 function onClick()
 {
-  loadGameData('./polyelo_data.json') // Replace with your actual file path
+  loadGameData('polyelo_data.json') // Replace with your actual file path
     .then(data => {
       // Game data loaded successfully
       var tribe1 = document.getElementById("tribe1").value;
