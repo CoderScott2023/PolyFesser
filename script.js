@@ -40,6 +40,7 @@ function onClick() {
       var tribe1 = document.getElementById("tribe1").value;
       var tribe2 = document.getElementById("tribe2").value;
       var filters = {};
+      var mapSize = document.getElementById("mapSize").value;
       const winRate = calculateWinRate(data, tribe1, tribe2, filters);
       console.log(`Win rate for ${tribe1} vs ${tribe2} with filters: ${winRate}%`);
     })
