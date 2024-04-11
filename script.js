@@ -41,6 +41,9 @@ function onClick() {
       var tribe2 = document.getElementById("tribe2").value;
       var filters = {};
       var mapSize = document.getElementById("map-size").value;
+      var mapType = document.getElementById("map-type").value;
+      var minElo = document.getElementById("min-elo").value;
+      var maxElo = document.getElementById("max-elo").value;
       const winRate = calculateWinRate(data, tribe1, tribe2, filters);
       console.log(`Win rate for ${tribe1} vs ${tribe2} with filters: ${winRate}%`);
     })
