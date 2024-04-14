@@ -48,7 +48,10 @@ function onClick() {
 
       if(mapSize != "Select Map Size")
       {
-        
+        filters.push({
+          key: "map_size",
+          value: document.getElementById("map-size");
+        })
       }
       
       console.log(`Win rate for ${tribe1} vs ${tribe2} with filters: ${winRate}%`);
