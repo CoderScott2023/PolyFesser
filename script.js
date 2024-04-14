@@ -45,6 +45,12 @@ function onClick() {
       var minElo = document.getElementById("min-elo").value;
       var maxElo = document.getElementById("max-elo").value;
       const winRate = calculateWinRate(data, tribe1, tribe2, filters);
+
+      if(mapSize != "Select Map Size")
+      {
+        
+      }
+      
       console.log(`Win rate for ${tribe1} vs ${tribe2} with filters: ${winRate}%`);
     })
     .catch(error => console.log('Error fetching game data: Problem with calculateWinRate function', error));
