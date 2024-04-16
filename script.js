@@ -53,6 +53,10 @@ function onClick() {
           value: document.getElementById("map-size");
         })
       }
+      if(mapType != "Select Map Type")
+      {
+        
+      }
       
       console.log(`Win rate for ${tribe1} vs ${tribe2} with filters: ${winRate}%`);
     })
