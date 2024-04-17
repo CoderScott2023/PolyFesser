@@ -51,11 +51,14 @@ function onClick() {
         filters.push({
           key: "map_size",
           value: document.getElementById("map-size");
-        })
+        });
       }
       if(mapType != "Select Map Type")
       {
-        
+        filters.push({
+          key: "map_type",
+          value: document.getElementById("map-type");
+        });
       }
       
       console.log(`Win rate for ${tribe1} vs ${tribe2} with filters: ${winRate}%`);
