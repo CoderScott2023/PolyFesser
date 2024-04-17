@@ -44,22 +44,37 @@ function onClick() {
       var mapType = document.getElementById("map-type").value;
       var minElo = document.getElementById("min-elo").value;
       var maxElo = document.getElementById("max-elo").value;
-      const winRate = calculateWinRate(data, tribe1, tribe2, filters);
 
       if(mapSize != "Select Map Size")
       {
         filters.push({
           key: "map_size",
-          value: document.getElementById("map-size");
+          value: document.getElementById("map-size")
         });
       }
       if(mapType != "Select Map Type")
       {
         filters.push({
           key: "map_type",
-          value: document.getElementById("map-type");
+          value: document.getElementById("map-type")
         });
       }
+      if(minElo != "")
+      {
+        filters.push({
+          key: "min_elo",
+          value: document.getElementById("min-elo")
+        });
+      }
+      if(maxElo != "")
+      {
+        filters.push({
+          key: "max_elo",
+          value: document.getElementById("max-elo")
+        });
+      }
+      
+      const winRate = calculateWinRate(data, tribe1, tribe2, filters);
       
       console.log(`Win rate for ${tribe1} vs ${tribe2} with filters: ${winRate}%`);
     })
