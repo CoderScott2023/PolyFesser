@@ -45,14 +45,14 @@ function onClick() {
       var minElo = document.getElementById("min-elo").value;
       var maxElo = document.getElementById("max-elo").value;
 
-      if(mapSize != "Select Map Size")
+      /*if(mapSize != "Select Map Size")
       {
         console.log("1 error");
         filters.push({
           key: "map_size",
           value: document.getElementById("map-size")
         });
-      }
+      }*/
       if(mapType != "Select Map Type")
       {
         console.log("2 error");
