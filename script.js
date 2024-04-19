@@ -45,7 +45,7 @@ function onClick() {
       var minElo = document.getElementById("min-elo").value;
       var maxElo = document.getElementById("max-elo").value;
 
-      /*if(mapSize != "Select Map Size")
+      if(mapSize != "")
       {
         console.log("1 error");
         filters.push({
@@ -53,14 +53,14 @@ function onClick() {
           value: document.getElementById("map-size")
         });
       }
-      if(mapType != "Select Map Type")
+      if(mapType != "")
       {
         console.log("2 error");
         filters.push({
           key: "map_type",
           value: document.getElementById("map-type")
         });
-      }*/
+      }
       if(minElo != "")
       {
         console.log("3 error");
