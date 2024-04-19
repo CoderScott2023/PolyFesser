@@ -52,7 +52,7 @@ function onClick() {
           key: "map_size",
           value: document.getElementById("map-size")
         });
-      }*/
+      }
       if(mapType != "Select Map Type")
       {
         console.log("2 error");
@@ -60,7 +60,7 @@ function onClick() {
           key: "map_type",
           value: document.getElementById("map-type")
         });
-      }
+      }*/
       if(minElo != "")
       {
         console.log("3 error");
