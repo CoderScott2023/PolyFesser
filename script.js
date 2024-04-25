@@ -45,42 +45,23 @@ function onClick() {
       var minElo = document.getElementById("min-elo").value;
       var maxElo = document.getElementById("max-elo").value;
 
-      if(mapSize != "")
-      {
-        console.log("1 error");
-        filters.push({
-          key: "map_size",
-          value: document.getElementById("map-size")
-        });
+      if (mapSize !== "") {
+        filters["map_size"] = mapSize;
       }
-      if(mapType != "")
-      {
-        console.log("2 error");
-        filters.push({
-          key: "map_type",
-          value: document.getElementById("map-type")
-        });
+      if (mapType !== "") {
+        filters["map_type"] = mapType;
       }
-      if(minElo != "")
-      {
-        console.log("3 error");
-        filters.push({
-          key: "min_elo",
-          value: document.getElementById("min-elo")
-        });
+      if (minElo !== "") {
+        filters["min_elo"] = parseInt(minElo); // Convert to integer if needed
       }
-      if(maxElo != "")
-      {
-        console.log("4 error");
-        filters.push({
-          key: "max_elo",
-          value: document.getElementById("max-elo")
-        });
+      if (maxElo !== "") {
+        filters["max_elo"] = parseInt(maxElo); // Convert to integer if needed
       }
-      
+      console.log(filters);
+
       const winRate = calculateWinRate(data, tribe1, tribe2, filters);
-      
+
       console.log(`Win rate for ${tribe1} vs ${tribe2} with filters: ${winRate}%`);
     })
-    .catch(error => console.log('Error fetching game data: Problem with calculateWinRate function', error));
+    .catch(error => console.error('Error fetching game data: Problem with calculateWinRate function', error));
 }
