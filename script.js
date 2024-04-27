@@ -4,12 +4,20 @@ function calculateWinRate(data, tribe1, tribe2, filters) {
     const isMatchup = (entry.winning_tribe === tribe1 && entry.opponent_tribe === tribe2) ||
       (entry.winning_tribe === tribe2 && entry.opponent_tribe === tribe1);
 
-    // Filter based on user-defined criteria (replace with your data structure)
+    // Filter based on user-defined criteria
     if (Object.keys(filters).length !== 0) {
-      const filterMatch = Object.entries(filters).every(([key, value]) => entry[key] === value);
+      const filterMatch = Object.entries(filters).every(([key, value]) => {
+        // If the filter key is 'minElo' or 'maxElo', check if the Elo falls within the specified range
+        if (key === 'min_elo') {
+          return entry['elo'] !== undefined && entry['elo'] >= value;
+        } else if (key === 'max_elo') {
+          return entry['elo'] !== undefined && entry['elo'] <= value;
+        } else {
+          return entry[key] === value;
+        }
+      });
       return isMatchup && filterMatch;
-    }
-    else {
+    } else {
       return isMatchup;
     }
   });
@@ -22,6 +30,8 @@ function calculateWinRate(data, tribe1, tribe2, filters) {
   const winRate = totalGames ? (tribe1Wins / totalGames) * 100 : 0;
   return winRate.toFixed(2); // Format win rate to two decimal places
 }
+
+
 
 // Function to load game data from a JSON file
 function loadGameData(fileName) {
