@@ -72,6 +72,9 @@ function onClick() {
       const winRate = calculateWinRate(data, tribe1, tribe2, filters);
 
       console.log(`Win rate for ${tribe1} vs ${tribe2} with filters: ${winRate}%`);
+
+      document.getElementById("homePage").classList.remove("buttons");
+      document.getElementById("homePage").classList.add("hidden");
     })
     .catch(error => console.error('Error fetching game data: Problem with calculateWinRate function', error));
 }
