@@ -75,6 +75,7 @@ function onClick() {
 
       document.getElementById("homePage").classList.remove("buttons");
       document.getElementById("homePage").classList.add("hidden");
+      document.getElementById("winningText").innerHTML = `Win rate for ${tribe1} vs ${tribe2} with filters: ${winRate}%`;
     })
     .catch(error => console.error('Error fetching game data: Problem with calculateWinRate function', error));
 }
