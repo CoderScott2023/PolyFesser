@@ -1,3 +1,5 @@
+var totalGames = 0;
+
 function calculateWinRate(data, tribe1, tribe2, filters) {
   const filteredData = data.filter(entry => {
     // Matchup filter (same as before)
@@ -24,7 +26,7 @@ function calculateWinRate(data, tribe1, tribe2, filters) {
 
   // Count wins and losses for tribe1
   const tribe1Wins = filteredData.filter(entry => entry.winning_tribe === tribe1).length;
-  const totalGames = filteredData.length;
+  totalGames = filteredData.length;
 
   // Calculate win rate (handle division by zero)
   const winRate = totalGames ? (tribe1Wins / totalGames) * 100 : 0;
@@ -80,8 +82,11 @@ function onClick() {
       document.getElementById(tribe1).classList.add("imgShowing1");
       document.getElementById(tribe2).classList.add("imgShowing2");
       document.getElementById("Swords").classList.remove("hidden");
+      document.getElementById("sourcesText").classList.remove("hidden");
+      document.getElementById("sourcesText").classList.add("sources");
       document.getElementById("Swords").classList.add("swords");
       document.getElementById("winrateText").innerHTML = `${winRate}%`;
+      document.getElementById("sourcesText").innerHTML = `Based on ${totalGames} total games`;
 
       if (Object.keys(filters).length !== 0) {
         document.getElementById("winningText").innerHTML = `Win rate for ${tribe1} vs ${tribe2} with filters:`;
