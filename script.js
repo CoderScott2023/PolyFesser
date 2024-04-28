@@ -83,6 +83,8 @@ function onClick() {
       document.getElementById(tribe2).classList.add("imgShowing2");
       document.getElementById("Swords").classList.remove("hidden");
       document.getElementById("sourcesText").classList.remove("hidden");
+      document.getElementById("resetButton").classList.remove("hidden");
+      document.getElementById("resetButton").classList.add("reset");
       document.getElementById("sourcesText").classList.add("sources");
       document.getElementById("Swords").classList.add("swords");
       document.getElementById("winrateText").innerHTML = `${winRate}%`;
