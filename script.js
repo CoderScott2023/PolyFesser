@@ -77,11 +77,17 @@ function onClick() {
       document.getElementById("homePage").classList.add("hidden");
       document.getElementById("statPage").classList.remove("hidden");
       document.getElementById("statPage").classList.add("showing");
+      document.getElementById(tribe1).classList.add("imgShowing1");
+      document.getElementById(tribe2).classList.add("imgShowing2");
+      document.getElementById("Swords").classList.remove("hidden");
+      document.getElementById("Swords").classList.add("swords");
+      document.getElementById("winrateText").innerHTML = `${winRate}%`;
+
       if (Object.keys(filters).length !== 0) {
-        document.getElementById("winningText").innerHTML = `Win rate for ${tribe1} vs ${tribe2} with filters: ${winRate}%`;
+        document.getElementById("winningText").innerHTML = `Win rate for ${tribe1} vs ${tribe2} with filters:`;
       }
       else {
-        document.getElementById("winningText").innerHTML = `Win rate for ${tribe1} vs ${tribe2}: ${winRate}%`;
+        document.getElementById("winningText").innerHTML = `Win rate for ${tribe1} vs ${tribe2}:`;
 
       }
     })
