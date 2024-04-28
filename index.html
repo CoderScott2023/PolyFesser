@@ -9,7 +9,7 @@
 </head>
 
 <body>
-  <h1>PolyFesser</h1>
+  <h1 class="titleText">PolyFesser</h1>
   <div id="homePage" class="buttons">
     <div class="filter-group">
       <label for="tribe1">Tribe 1:</label>
@@ -92,11 +92,23 @@
   </div>
   <div id="statPage" class="hidden">
     <h2 id="winningText" style="text-align: center;"></h2>
+    <h1 id="winrateText" style="margin-top: 20px;"></h1>
   </div>
+  <img id="Bardur" src="Bardur.png" alt="Bardur" class="hidden">
+  <img id="Xin Xi" src="Xin-Xi.png" alt="Xin Xi" class="hidden">
+  <img id="Swords" src="Swords.png" alt="Swords" class="hidden">
 </body>
 <script src="script.js"></script>
 <link rel="stylesheet" href="style.css">
 <style>
+  .swords {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 20%;
+    height: 20%;
+  }
+
   .hidden {
     display: none;
   }
@@ -104,6 +116,20 @@
   .showing {
     display: block;
     margin-top: 70px;
+  }
+
+  .imgShowing1 {
+    display: block;
+    width: 30%;
+    height: 30%;
+    float: left;
+  }
+
+  .imgShowing2 {
+    width: 30%;
+    height: 30%;
+    display: block;
+    float: right;
   }
 
   /* Body styles */
@@ -120,6 +146,10 @@
     font-size: 4em;
     margin-bottom: 20px;
     text-shadow: 2px 2px 0px black;
+  }
+
+  .titleText {
+    font-size: 80px;
   }
 
   h1 span {
