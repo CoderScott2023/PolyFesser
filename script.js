@@ -77,7 +77,13 @@ function onClick() {
       document.getElementById("homePage").classList.add("hidden");
       document.getElementById("statPage").classList.remove("hidden");
       document.getElementById("statPage").classList.add("showing");
-      document.getElementById("winningText").innerHTML = `Win rate for ${tribe1} vs ${tribe2} with filters: ${winRate}%`;
+      if (Object.keys(filters).length !== 0) {
+        document.getElementById("winningText").innerHTML = `Win rate for ${tribe1} vs ${tribe2} with filters: ${winRate}%`;
+      }
+      else {
+        document.getElementById("winningText").innerHTML = `Win rate for ${tribe1} vs ${tribe2}: ${winRate}%`;
+
+      }
     })
     .catch(error => console.error('Error fetching game data: Problem with calculateWinRate function', error));
 }
