@@ -102,18 +102,5 @@ function onClick() {
 }
 
 function reset() {
-  /*document.getElementById("homePage").classList.add("buttons");
-  document.getElementById("homePage").classList.remove("hidden");
-  document.getElementById("statPage").classList.add("hidden");
-  document.getElementById("statPage").classList.remove("showing");
-  document.getElementById(tribe1).classList.remove("imgShowing1");
-  document.getElementById(tribe2).classList.remove("imgShowing2");
-  document.getElementById(tribe1).classList.add("hidden");
-  document.getElementById(tribe2).classList.add("hidden");
-  document.getElementById("Swords").classList.remove("swords");
-  document.getElementById("Swords").classList.add("hidden");
-  document.getElementById("sourcesText").classList.add("hidden");
-  document.getElementById("resetButton").classList.add("hidden");
-  document.getElementById("resetButton").classList.remove("reset");*/
   location.reload();
 }
