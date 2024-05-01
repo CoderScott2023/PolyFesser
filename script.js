@@ -104,3 +104,14 @@ function onClick() {
 function reset() {
   location.reload();
 }
+const tribe1Select = document.getElementById('tribe1');
+const tribe2Select = document.getElementById('tribe2');
+
+tribe1Select.addEventListener('change', () => {
+  const selectedTribe = tribe1Select.value;
+  tribe2Select.disabled = selectedTribe === ''; // Enable tribe2 if no tribe selected in tribe1
+
+  for (let option of tribe2Select.options) {
+    option.disabled = option.value === selectedTribe;
+  }
+});
