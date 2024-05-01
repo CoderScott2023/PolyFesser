@@ -107,11 +107,18 @@ function reset() {
 const tribe1Select = document.getElementById('tribe1');
 const tribe2Select = document.getElementById('tribe2');
 
-tribe1Select.addEventListener('change', () => {
-  const selectedTribe = tribe1Select.value;
-  tribe2Select.disabled = selectedTribe === ''; // Enable tribe2 if no tribe selected in tribe1
+const disableTribe = (selectElement, selectedValue) => {
+  selectElement.disabled = selectedValue === ''; // Enable if no tribe selected
 
-  for (let option of tribe2Select.options) {
-    option.disabled = option.value === selectedTribe;
+  for (let option of selectElement.options) {
+    option.disabled = option.value === selectedValue;
   }
+};
+
+tribe1Select.addEventListener('change', () => {
+  disableTribe(tribe2Select, tribe1Select.value);
+});
+
+tribe2Select.addEventListener('change', () => {
+  disableTribe(tribe1Select, tribe2Select.value);
 });
