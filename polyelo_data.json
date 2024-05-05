@@ -2,7 +2,6 @@
   {
     "winning_tribe": "Xin Xi",
     "opponent_tribe": "Bardur",
-    "min_elo": 1200,
-    "max_elo":1200
+    "elo": 1200
   }
 ]
