@@ -1,1 +1,9 @@
-[{"winning_tribe":"Aquarion","opponent_tribe":"Hoodrick","map_size":"Huge","map_type":"Water World","elo":"1200"}]
+[
+  {
+    "winning_tribe":"Aquarion",
+    "opponent_tribe":"Hoodrick",
+    "map_size":"Huge",
+    "map_type":"Water World",
+    "elo":"1200"
+  }
+]
