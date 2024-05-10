@@ -1,3 +1,5 @@
+#POSSIBLE SCRIPT, NOT USED CURRENTLY
+
 import requests
 from bs4 import BeautifulSoup
 
