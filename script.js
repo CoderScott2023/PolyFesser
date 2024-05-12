@@ -1,10 +1,13 @@
+
 var totalGames = 0;
 
-function calculateWinRate(data, tribe1, tribe2, filters) {
+function calculateWinRate(data, tribe1, tribe2 = null, filters) {
   const filteredData = data.filter(entry => {
     // Matchup filter (same as before)
-    const isMatchup = (entry.winning_tribe === tribe1 && entry.opponent_tribe === tribe2) ||
-      (entry.winning_tribe === tribe2 && entry.opponent_tribe === tribe1);
+    const isMatchup = tribe2 ?
+      ((entry.winning_tribe === tribe1 && entry.opponent_tribe === tribe2) ||
+        (entry.winning_tribe === tribe2 && entry.opponent_tribe === tribe1)) :
+      (entry.winning_tribe === tribe1 || entry.opponent_tribe === tribe1);
 
     // Filter based on user-defined criteria
     if (Object.keys(filters).length !== 0) {
@@ -26,12 +29,14 @@ function calculateWinRate(data, tribe1, tribe2, filters) {
 
   // Count wins and losses for tribe1
   const tribe1Wins = filteredData.filter(entry => entry.winning_tribe === tribe1).length;
-  totalGames = filteredData.length;
+  const totalTribeGames = tribe2 ? filteredData.length : filteredData.filter(entry => entry.winning_tribe === tribe1 || entry.opponent_tribe === tribe1).length;
 
+  totalGames = filteredData.length;
   // Calculate win rate (handle division by zero)
-  const winRate = totalGames ? (tribe1Wins / totalGames) * 100 : 0;
+  const winRate = totalTribeGames ? (tribe1Wins / totalTribeGames) * 100 : 0;
   return winRate.toFixed(2); // Format win rate to two decimal places
 }
+
 
 
 
@@ -46,11 +51,17 @@ function loadGameData(fileName) {
 }
 
 function onClick() {
-  loadGameData('polyelo_data.json') // Replace with your actual file path
+  var tribe1 = document.getElementById("tribe1").value;
+  var tribe2 = document.getElementById("tribe2").value;
+
+  // Check if at least one tribe is selected
+  if (tribe1 === '' && tribe2 === '') {
+    console.log("Please select at least one tribe.");
+    return; // Exit function early if no tribe is selected
+  }
+
+  loadGameData('polyelo_data.json')
     .then(data => {
-      // Game data loaded successfully
-      var tribe1 = document.getElementById("tribe1").value;
-      var tribe2 = document.getElementById("tribe2").value;
       var filters = {};
       var mapSize = document.getElementById("map-size").value;
       var mapType = document.getElementById("map-type").value;
@@ -71,39 +82,53 @@ function onClick() {
       }
       console.log(filters);
 
-      const winRate = calculateWinRate(data, tribe1, tribe2, filters);
+      let winRate;
+      if (tribe1 !== '' && tribe2 !== '') {
+        // Calculate win rate for both tribes
+        winRate = calculateWinRate(data, tribe1, tribe2, filters);
+        console.log(`Win rate for ${tribe1} vs ${tribe2} with filters: ${winRate}%`);
+      } else if (tribe1 !== '') {
+        // Calculate win rate for just tribe1
+        winRate = calculateWinRate(data, tribe1, null, filters);
+        console.log(`Win rate for ${tribe1} with filters: ${winRate}%`);
+      } else {
+        // Calculate win rate for just tribe2
+        winRate = calculateWinRate(data, tribe2, null, filters);
+        console.log(`Win rate for ${tribe2} with filters: ${winRate}%`);
+      }
 
-      console.log(`Win rate for ${tribe1} vs ${tribe2} with filters: ${winRate}%`);
-
+      // Display the win rate based on selected tribes
       document.getElementById("homePage").classList.remove("buttons");
       document.getElementById("homePage").classList.add("hidden");
       document.getElementById("statPage").classList.remove("hidden");
       document.getElementById("statPage").classList.add("showing");
-      document.getElementById(tribe1).classList.add("imgShowing1");
-      document.getElementById(tribe2).classList.add("imgShowing2");
-      document.getElementById("Swords").classList.remove("hidden");
+
+      if (tribe1 !== '' && tribe2 !== '') {
+        document.getElementById(tribe1).classList.add("imgShowing1");
+        document.getElementById(tribe2).classList.add("imgShowing2");
+        document.getElementById("Swords").classList.remove("hidden");
+        document.getElementById("Swords").classList.add("swords");
+        document.getElementById("winningText").innerHTML = `Win rate for ${tribe1} vs ${tribe2}:`;
+      } else if (tribe1 !== '') {
+        document.getElementById(tribe1).classList.add("imgMiddleShowing");
+        document.getElementById("winningText").innerHTML = `Win rate for ${tribe1}:`;
+      }
+      
       document.getElementById("sourcesText").classList.remove("hidden");
       document.getElementById("resetButton").classList.remove("hidden");
       document.getElementById("resetButton").classList.add("reset");
       document.getElementById("sourcesText").classList.add("sources");
-      document.getElementById("Swords").classList.add("swords");
       document.getElementById("winrateText").innerHTML = `${winRate}%`;
       document.getElementById("sourcesText").innerHTML = `Based on ${totalGames} total games`;
-
-      if (Object.keys(filters).length !== 0) {
-        document.getElementById("winningText").innerHTML = `Win rate for ${tribe1} vs ${tribe2} with filters:`;
-      }
-      else {
-        document.getElementById("winningText").innerHTML = `Win rate for ${tribe1} vs ${tribe2}:`;
-
-      }
     })
     .catch(error => console.error('Error fetching game data: Problem with calculateWinRate function', error));
 }
 
+
 function reset() {
   location.reload();
 }
+
 const tribe1Select = document.getElementById('tribe1');
 const tribe2Select = document.getElementById('tribe2');
 
@@ -121,4 +146,18 @@ tribe1Select.addEventListener('change', () => {
 
 tribe2Select.addEventListener('change', () => {
   disableTribe(tribe1Select, tribe2Select.value);
+});
+
+const firstTribeSelect = document.getElementById('tribe1');
+const secondTribeSelect = document.getElementById('tribe2');
+
+firstTribeSelect.addEventListener('change', () => {
+  secondTribeSelect.disabled = firstTribeSelect.value === ''; // Disable secondTribe select element if firstTribe is not selected
+  if (firstTribeSelect.value === '') {
+    secondTribeSelect.value = ''; // Clear secondTribe selection when firstTribe goes back to ""
+  }
+});
+
+secondTribeSelect.addEventListener('change', () => {
+  firstTribeSelect.disabled = secondTribeSelect.value === ''; // Disable firstTribe select element if secondTribe is not selected
 });
