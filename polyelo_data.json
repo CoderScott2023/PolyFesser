@@ -471,12 +471,19 @@
     "game_mode": "Might"
   },
   {
-    "elo": "1893",
-    "opponent_tribe": "Elyrion",
-    "map_type": "Dryland",
-    "winning_tribe": "Cymanti",
-    "map_size": "Tiny",
-    "game_mode": "Might"
-  },
-  {"elo":"1095","winning_tribe":"Cymanti","map_size":"Tiny","map_type":"Dryland","opponent_tribe":"Ai Mo","game_mode": "Might"}
+        "elo": "1893",
+        "opponent_tribe": "Elyrion",
+        "map_type": "Dryland",
+        "winning_tribe": "Cymanti",
+        "map_size": "Tiny",
+        "game_mode": "Might"
+    },
+    {
+        "elo": "1095",
+        "winning_tribe": "Cymanti",
+        "map_size": "Tiny",
+        "map_type": "Dryland",
+        "opponent_tribe": "Ai Mo",
+        "game_mode": "Might"
+    }
 ]
