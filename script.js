@@ -67,12 +67,16 @@ function onClick() {
       var mapType = document.getElementById("map-type").value;
       var minElo = document.getElementById("min-elo").value;
       var maxElo = document.getElementById("max-elo").value;
+      var gameMode = document.getElementById("game-mode").value;
 
       if (mapSize !== "") {
         filters["map_size"] = mapSize;
       }
       if (mapType !== "") {
         filters["map_type"] = mapType;
+      }
+      if (gameMode !== "") {
+        filters["game_mode"] = gameMode;
       }
       if (minElo !== "") {
         filters["min_elo"] = parseInt(minElo); // Convert to integer if needed
@@ -113,7 +117,7 @@ function onClick() {
         document.getElementById(tribe1).classList.add("imgMiddleShowing");
         document.getElementById("winningText").innerHTML = `Win rate for ${tribe1}:`;
       }
-      
+
       document.getElementById("sourcesText").classList.remove("hidden");
       document.getElementById("resetButton").classList.remove("hidden");
       document.getElementById("resetButton").classList.add("reset");
