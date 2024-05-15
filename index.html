@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PolyFesser</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -87,6 +88,15 @@
       </select>
     </div>
     <div class="filter-group">
+      <label for="players">Game Mode:</label>
+      <select id="players" name="game-mode">
+        <option value="two">Two Players</option>
+        <option value="">Any</option>
+        <option value="four">Four Players</option>
+        <option value="nine">Nine Players</option>
+      </select>
+    </div>
+    <div class="filter-group">
       <label for="min-elo">Minimum Elo:</label>
       <input type="number" id="min-elo" name="min-elo" min="0" placeholder="Enter minimum Elo">
     </div>
@@ -126,6 +136,7 @@
   </div>
 </body>
 <script src="script.js"></script>
+<link rel="stylesheet" href="style.css">
 <style>
   .sources {
     text-align: center;
