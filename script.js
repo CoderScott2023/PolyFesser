@@ -68,6 +68,7 @@ function onClick() {
       var minElo = document.getElementById("min-elo").value;
       var maxElo = document.getElementById("max-elo").value;
       var gameMode = document.getElementById("game-mode").value;
+      var players = document.getElementById("players").value;
 
       if (mapSize !== "") {
         filters["map_size"] = mapSize;
@@ -77,6 +78,9 @@ function onClick() {
       }
       if (gameMode !== "") {
         filters["game_mode"] = gameMode;
+      }
+      if (players !== "") {
+        filters["players"] = players;
       }
       if (minElo !== "") {
         filters["min_elo"] = parseInt(minElo); // Convert to integer if needed
