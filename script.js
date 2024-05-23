@@ -1,13 +1,16 @@
-
 var totalGames = 0;
+var players = null;
 
 function calculateWinRate(data, tribe1, tribe2 = null, filters) {
   const filteredData = data.filter(entry => {
-    // Matchup filter (same as before)
-    const isMatchup = tribe2 ?
+    // Check if the game involves four or nine players
+    const isFourOrNinePlayers = entry.players === "Four" || entry.players === "Nine";
+
+    // Apply the matchup filter conditionally based on the number of players
+    const isMatchup = isFourOrNinePlayers || (tribe2 ?
       ((entry.winning_tribe === tribe1 && entry.opponent_tribe === tribe2) ||
         (entry.winning_tribe === tribe2 && entry.opponent_tribe === tribe1)) :
-      (entry.winning_tribe === tribe1 || entry.opponent_tribe === tribe1);
+      (entry.winning_tribe === tribe1 || entry.opponent_tribe === tribe1));
 
     // Filter based on user-defined criteria
     if (Object.keys(filters).length !== 0) {
@@ -21,7 +24,8 @@ function calculateWinRate(data, tribe1, tribe2 = null, filters) {
           return entry[key] === value;
         }
       });
-      return isMatchup && filterMatch;
+
+      return filterMatch && (players === "Two" || isFourOrNinePlayers);
     } else {
       return isMatchup;
     }
@@ -31,14 +35,21 @@ function calculateWinRate(data, tribe1, tribe2 = null, filters) {
   const tribe1Wins = filteredData.filter(entry => entry.winning_tribe === tribe1).length;
   const totalTribeGames = tribe2 ? filteredData.length : filteredData.filter(entry => entry.winning_tribe === tribe1 || entry.opponent_tribe === tribe1).length;
 
-  totalGames = filteredData.length;
-  // Calculate win rate (handle division by zero)
-  const winRate = totalTribeGames ? (tribe1Wins / totalTribeGames) * 100 : 0;
+  totalGames = totalTribeGames;
+  var winRate = 0;
+
+  // Check if 'players' is defined and has a value
+  if (players && players === "Two") {
+    // Calculate win rate for two players
+    winRate = totalTribeGames ? (tribe1Wins / totalTribeGames) * 100 : 0;
+  } else {
+    // Calculate win rate for more than two players (four or nine players)
+    const totalTribeGamesFiltered = filteredData.filter(entry => entry.players === "Four" || entry.players === "Nine").length;
+    winRate = totalTribeGamesFiltered ? (tribe1Wins / totalTribeGamesFiltered) * 100 : 0;
+  }
+
   return winRate.toFixed(2); // Format win rate to two decimal places
 }
-
-
-
 
 // Function to load game data from a JSON file
 function loadGameData(fileName) {
@@ -68,7 +79,7 @@ function onClick() {
       var minElo = document.getElementById("min-elo").value;
       var maxElo = document.getElementById("max-elo").value;
       var gameMode = document.getElementById("game-mode").value;
-      var players = document.getElementById("players").value;
+      players = document.getElementById("players").value;
 
       if (mapSize !== "") {
         filters["map_size"] = mapSize;
@@ -79,7 +90,7 @@ function onClick() {
       if (gameMode !== "") {
         filters["game_mode"] = gameMode;
       }
-      if (players !== "") {
+      if (players !== "") { // Check if players has a value
         filters["players"] = players;
       }
       if (minElo !== "") {
@@ -132,7 +143,6 @@ function onClick() {
     .catch(error => console.error('Error fetching game data: Problem with calculateWinRate function', error));
 }
 
-
 function reset() {
   location.reload();
 }
@@ -152,20 +162,30 @@ tribe1Select.addEventListener('change', () => {
   disableTribe(tribe2Select, tribe1Select.value);
 });
 
-tribe2Select.addEventListener('change', () => {
-  disableTribe(tribe1Select, tribe2Select.value);
-});
+const tribe1Dropdown = document.getElementById('tribe1');
+const tribe2Dropdown = document.getElementById('tribe2');
+const playersDropdown = document.getElementById('players');
 
-const firstTribeSelect = document.getElementById('tribe1');
-const secondTribeSelect = document.getElementById('tribe2');
-
-firstTribeSelect.addEventListener('change', () => {
-  secondTribeSelect.disabled = firstTribeSelect.value === ''; // Disable secondTribe select element if firstTribe is not selected
-  if (firstTribeSelect.value === '') {
-    secondTribeSelect.value = ''; // Clear secondTribe selection when firstTribe goes back to ""
+const disablePlayersOptions = (disabled) => {
+  for (let option of playersDropdown.options) {
+    if (option.value !== "Two") {
+      option.disabled = disabled;
+    }
   }
+};
+
+tribe2Dropdown.addEventListener('change', () => {
+  const isTribe2Selected = tribe2Dropdown.value !== ''; // Check if a tribe is selected in the second tribe dropdown
+
+  // Disable all options in the players dropdown except for "Two" players option if a tribe is selected in the second tribe dropdown
+  disablePlayersOptions(isTribe2Selected);
 });
 
-secondTribeSelect.addEventListener('change', () => {
-  firstTribeSelect.disabled = secondTribeSelect.value === ''; // Disable firstTribe select element if secondTribe is not selected
+// Initialize player options state
+disablePlayersOptions(false); // Initially enable all player options
+// Reset playersDropdown to "Two Players" if tribe2 is selected
+tribe2Dropdown.addEventListener('change', () => {
+  if (tribe2Dropdown.value !== '') {
+    playersDropdown.value = "Two";
+  }
 });
