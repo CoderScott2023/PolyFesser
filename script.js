@@ -39,14 +39,42 @@ function calculateWinRate(data, tribe1, tribe2 = null, filters) {
   var winRate = 0;
 
   // Check if 'players' is defined and has a value
-  if (players && players === "Two") {
-    // Calculate win rate for two players
-    winRate = totalTribeGames ? (tribe1Wins / totalTribeGames) * 100 : 0;
-  } else {
-    // Calculate win rate for more than two players (four or nine players)
-    const totalTribeGamesFiltered = filteredData.filter(entry => entry.players === "Four" || entry.players === "Nine").length;
+  if (players === "Two") {
+    if (tribe2 === null) {
+      // Calculate win rate for two players where tribe1 competes against all opponents
+      const totalTribeGames = filteredData.filter(entry =>
+        entry.winning_tribe === tribe1 || entry.opponent_tribe === tribe1
+      ).length;
+      winRate = totalTribeGames ? (tribe1Wins / totalTribeGames) * 100 : 0;
+    } else {
+      // Calculate win rate for two tribes
+      const totalTribeGames1 = filteredData.filter(entry => {
+        return (
+          (entry.winning_tribe === tribe1 && entry.opponent_tribe === tribe2) ||
+          (entry.winning_tribe === tribe2 && entry.opponent_tribe === tribe1)
+        );
+      }).length;
+      const tribe1Wins = filteredData.filter(entry =>
+        entry.winning_tribe === tribe1 && entry.opponent_tribe === tribe2
+      ).length;
+
+      console.log(tribe1Wins);
+      console.log(totalTribeGames1);
+      totalGames = totalTribeGames1;
+      winRate = totalTribeGames1 ? (tribe1Wins / totalTribeGames1) * 100 : 0;
+    }
+  } else if (players === "Four" || players === "Nine") {
+    // Calculate win rate for games with four or nine players involving only tribe1 and tribe2
+    const totalTribeGamesFiltered = filteredData.filter(entry =>
+      (entry.players === "Four" || entry.players === "Nine") &&
+      ((entry.winning_tribe === tribe1 && entry.opponent_tribe === tribe2) ||
+        (entry.winning_tribe === tribe2 && entry.opponent_tribe === tribe1))
+    ).length;
+    const tribe1Wins = filteredData.filter(entry => entry.winning_tribe === tribe1).length;
     winRate = totalTribeGamesFiltered ? (tribe1Wins / totalTribeGamesFiltered) * 100 : 0;
   }
+
+
 
   return winRate.toFixed(2); // Format win rate to two decimal places
 }
@@ -106,14 +134,10 @@ function onClick() {
         // Calculate win rate for both tribes
         winRate = calculateWinRate(data, tribe1, tribe2, filters);
         console.log(`Win rate for ${tribe1} vs ${tribe2} with filters: ${winRate}%`);
-      } else if (tribe1 !== '') {
+      } else if (tribe1 !== '' && tribe2 === '') {
         // Calculate win rate for just tribe1
         winRate = calculateWinRate(data, tribe1, null, filters);
         console.log(`Win rate for ${tribe1} with filters: ${winRate}%`);
-      } else {
-        // Calculate win rate for just tribe2
-        winRate = calculateWinRate(data, tribe2, null, filters);
-        console.log(`Win rate for ${tribe2} with filters: ${winRate}%`);
       }
 
       // Display the win rate based on selected tribes
