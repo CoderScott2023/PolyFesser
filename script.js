@@ -66,10 +66,7 @@ function calculateWinRate(data, tribe1, tribe2 = null, filters) {
   } else if (players === "Four" || players === "Nine") {
     // Calculate win rate for games with four or nine players involving only tribe1 and tribe2
     const totalTribeGamesFiltered = filteredData.filter(entry =>
-      (entry.players === "Four" || entry.players === "Nine") &&
-      ((entry.winning_tribe === tribe1 && entry.opponent_tribe === tribe2) ||
-        (entry.winning_tribe === tribe2 && entry.opponent_tribe === tribe1))
-    ).length;
+      (entry.players === "Four" || entry.players === "Nine")).length;
     const tribe1Wins = filteredData.filter(entry => entry.winning_tribe === tribe1).length;
     winRate = totalTribeGamesFiltered ? (tribe1Wins / totalTribeGamesFiltered) * 100 : 0;
   }
