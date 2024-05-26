@@ -194,7 +194,11 @@ const disablePlayersOptions = (disabled) => {
     }
   }
 };
-
+tribe1Dropdown.addEventListener('change', () => {
+    if (tribe1Dropdown.value === '') {
+        tribe2Dropdown.value = ''; // Reset tribe2Dropdown if tribe1dropdown is empty
+    }
+});
 tribe2Dropdown.addEventListener('change', () => {
   const isTribe2Selected = tribe2Dropdown.value !== ''; // Check if a tribe is selected in the second tribe dropdown
 
